@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id=container></div>
+
+    <div class="preguntas">
+        <input class="empezar" type="button" value="empezar">
+    <input class="detener" type="button" value="detener">
+    <input type="text" id="salida" style="width: 400px;" />
+
+    <div class="sec_preguntas">
+        <h2 class="pregunta"></h2>
+    </div>
+    </div>
+    <script src="jquery-3.3.1.min.js"></script>
+    <!--script src="./node_modules/phaser/dist/phaser.min.js"></script>-->
+    <!--<script src="./src/objetos/phaser.min.js"></script>-->
+    <script src="//cdn.jsdelivr.net/npm/phaser@3.14.0/dist/phaser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
+    <script src="src/objetos/jugador.js"></script>
+    <script src="servidor.js"></script>
+    <script src="./src/cliente.js"></script>
+    <script src="./src/cargar.js"></script>
+    <script src="src/escenas/escena_A.js"></script>
+    <script src="src/escenas/escena_B.js"></script>
+    <script src="./src/init.js"></script>
+    <script src="./src/artyom.js"></script>
+	<script src="./src/artyomCommands.js"></script>
+    <script src="src/escenas/preguntas.js"></script>
+
+</body>
+</html>
