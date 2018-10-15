@@ -2,7 +2,6 @@
 import Escena_B from '/src/escenas/escena_B.js';
 import Cargar from './cargar.js';
 import Jugador from './objetos/jugador.js';*/
-
 var stage = new Escena_A("Stage");
 
 var stage2 = new Escena_B("escenab");
@@ -31,8 +30,10 @@ const config = {
         disableWebAudio: true
     }
 }
-
-var game = new Phaser.Game(config);
+function juego(){
+    var game = new Phaser.Game(config);
 game.scene.disableVisibilityChange = true;
+}
+
 
 

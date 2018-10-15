@@ -1,6 +1,3 @@
-/*import Jugador from '../objetos/jugador.js'
-import Escena_B from './escena_B.js';
-import Client from '../cliente.js'*/
 var FlyingStar = new Phaser.Class({
 
     Extends: Phaser.Physics.Arcade.Sprite,
@@ -45,6 +42,7 @@ var score = 0;
 var scoreText;
 var balas;
 var music;
+var jugador_principal;
 
 class Escena_A extends Phaser.Scene{
     constructor(key){
@@ -54,12 +52,17 @@ class Escena_A extends Phaser.Scene{
     
     
     create(){
+        //jugador princial
+
+        //fondo
         this.add.image(0,300,"fondo");
         var s=0;
         for (var i = 0; i<=10; i++) {
           this.add.image(s+1920,300,"fondo");
           s+=1920;
         }
+
+        //camara
         this.cameras.main.setBounds(0, 0, 10000, 600).setName('main');
         this.cameras.main.setBackgroundColor('#6bf');
         this.physics.world.setBounds(0, 0, 10000, 1080 * 2);
@@ -71,9 +74,8 @@ class Escena_A extends Phaser.Scene{
         //balas = this.physics.add.group({ allowGravity: false });
        //balas.add(new FlyingStar(this, 150, 500, 100, 100, 0.005), true);
 
+       //enemigo
         this.tick = this.time.now;
-
-
         this.ene = this.add.sprite(1200, 180,'mons');
 
 
@@ -83,17 +85,27 @@ class Escena_A extends Phaser.Scene{
         scoreText = this.add.text(400, 100, 'score: 0', { fontSize: '32px', fill: '#000' });
 
         //items
-
         this.crearitems();
         
         //plataformas
-
         this.crearplat();
 
-        //this.physics.add.collider(this.player, platforms);
+        jugador_principal = new Jugador(this, 50, 300, "boom");
+        jugador_principal.setScale(0.5);
+
 
         //fisicas
         this.physics.add.collider(stars, platforms);
+        this.physics.add.collider(jugador_principal, platforms);
+        this.physics.add.overlap(jugador_principal, stars, this.collectStar, null, this);
+        this.physics.add.collider(jugador_principal, platforms2);
+        jugador_principal.body.collideWorldBounds = true;
+        this.cameras.main.startFollow(jugador_principal, true, 0.05, 0.05);
+        this.minimap.startFollow(jugador_principal, true, 0.05, 0.5);
+        /*this.physics.add.overlap(this.jugador_principal, balas, function(){
+        this.scene.launch('escenab');
+        this.scene.pause();
+        }, null, this)*/
 
 
         //movimiento
@@ -102,19 +114,30 @@ class Escena_A extends Phaser.Scene{
         Client.askNewPlayer();
 
         this.input.keyboard.on('keydown_LEFT', function (event) {
+            jugador_principal.body.setVelocityX(-260);
+            jugador_principal.play('left');
             Client.mover("left");
         });
         this.input.keyboard.on('keydown_RIGHT', function (event) {
+            jugador_principal.body.setVelocityX(260);
+            jugador_principal.play('right');
             Client.mover("right");
         });
         this.input.keyboard.on('keyup_LEFT', function (event) {
+            jugador_principal.body.setVelocityX(0);
+            jugador_principal.play('stop');
             Client.mover("stop");
         });
         this.input.keyboard.on('keyup_RIGHT', function (event) {
+            jugador_principal.body.setVelocityX(0);
+            jugador_principal.play('stop');
             Client.mover("stop");
         });
         this.input.keyboard.on('keydown_UP', function (event) {
-            Client.mover("up");
+            if(jugador_principal.body.touching.down){
+                jugador_principal.body.setVelocityY(-850);
+                Client.mover("up");
+            }
         });
 
 
@@ -128,8 +151,12 @@ class Escena_A extends Phaser.Scene{
         this.ene.y = this.cameras.main.scrollY+130;
 
         if (this.time.now - this.tick > 3000) {
-            Client.envDisparo();
+            //Client.envDisparo();
              this.tick = this.time.now;
+        }
+        if(jugador_principal.body.y >= 600){
+            this.scene.launch('escenab');
+        this.scene.pause();
         }
 
         scoreText.x = this.cameras.main.scrollX;
@@ -247,16 +274,8 @@ class Escena_A extends Phaser.Scene{
         this.playerMap[id] = new Jugador(this, x, y, "boom");
         this.playerMap[id].setScale(0.5);
         this.physics.add.collider(this.playerMap[id], platforms);
-        this.physics.add.overlap(this.playerMap[id], stars, this.collectStar, null, this);
         this.physics.add.collider(this.playerMap[id], platforms2);
-        this.playerMap[id].body.collideWorldBounds = true;
-        this.cameras.main.startFollow(this.playerMap[id], true, 0.05, 0.05);
-        this.minimap.startFollow(this.playerMap[id], true, 0.05, 0.5);
-        this.physics.add.overlap(this.playerMap[id], balas, function(){
-        this.scene.launch('escenab');
-        this.scene.pause();
-        }, null, this)
-        
+        this.playerMap[id].body.collideWorldBounds = true;        
 
     };
 
@@ -295,10 +314,10 @@ class Escena_A extends Phaser.Scene{
             this.playerMap[id].body.setVelocityY(-850);
         }
 
-        if(this.playerMap[id].body.y >= 600){
+        /*if(this.playerMap[id].body.y >= 600){
             this.scene.launch('escenab');
         this.scene.pause();
-        }
+        }*/
 
     }
 
@@ -321,7 +340,7 @@ class Escena_A extends Phaser.Scene{
 
     //this.anims.create({ key: 'fly', frames: this.anims.generateFrameNumbers('chick', [0, 1, 2, 3]), frameRate: 5, repeat: -1 });
 
-        var angle = BetweenPoints(this.ene, this.playerMap[id]);
+        var angle = BetweenPoints(this.ene, jugador_principal);
 
         //SetToAngle(line, cannon.x, cannon.y, angle, 128);
         velocityFromRotation(angle, 600, velocity);
@@ -331,7 +350,7 @@ class Escena_A extends Phaser.Scene{
         chick.enableBody(true, this.ene.x, this.ene.y, true, true).setVelocity(velocity.x, velocity.y);
         chick.play('disparo');
 
-        this.physics.add.overlap(this.playerMap[id], chick, function(){
+        this.physics.add.overlap(jugador_principal, chick, function(){
             //this.scene.add('escenab', new Escena_B('escenab'), true);
         this.scene.launch('escenab');
         this.scene.pause();
@@ -350,8 +369,12 @@ class Escena_A extends Phaser.Scene{
         //this.scene.launch('escenab');
         this.scene.pause();
     }
+    posicion_principal(){
+        posicion_jugador_principal = {
+            x: jugador_principal.x,
+            y: jugador_principal.y
 
-    musica(){
-        ///music.play();
+        }
+        return posicion_jugador_principal;
     }
 }

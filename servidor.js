@@ -21,9 +21,11 @@ server.listen(process.env.PORT,function(){ // Listens to port 8081
 });
 
 
-server.lastPlayderID = 0; // Keep track of the last id assigned to a new player
+server.lastPlayderID = 0;
+server.numerojugadores = 0; // Keep track of the last id assigned to a new player
 
 io.on('connection',function(socket){
+    //console.log(server.numerojugadores++);
     socket.on('newplayer',function(){
         socket.player = {
             id: server.lastPlayderID++,
@@ -31,23 +33,39 @@ io.on('connection',function(socket){
             y: 300
         };
 
-        //if(socket.player.id <=7){
-            console.log("este es tu id"+socket.player.id);
+            //console.log("este es tu id"+socket.player.id);
 
-            socket.emit('allplayers',getAllPlayers());
+        socket.emit('allplayers',getAllPlayers());
         socket.broadcast.emit('newplayer', socket.player);
-        //}
-        socket.on('disconnect',function(){
-            io.emit('remove',socket.player.id);
-            socket.player.id-=2;
-        });
+        /*socket.on('disconnect',function(){
+            //io.emit('remove',socket.player.id);
+            server.numerojugadores--;
+            console.log(server.numerojugadores);
+            //socket.player.id-=2;
+        });*/
         socket.on('movers',function(direccion){
             socket.player.dir = direccion;
-            io.emit('mover', socket.player);
+            socket.broadcast.emit('mover', socket.player);
         });
         socket.on('sDisparo',function(){
             io.emit('nDisparo', socket.player.id);
         });
+    });
+    socket.on('aumenta',function(){
+        server.numerojugadores++;
+        if(server.numerojugadores == 2){
+            io.emit('empezarjuego');
+        }
+        console.log(server.numerojugadores);
+    });
+    socket.on('disconnect',function(){
+        //io.emit('remove',socket.player.id);
+        server.numerojugadores = getAllPlayers().length;
+        /*if(server.numerojugadores < 0){
+            server.numerojugadores = 0;
+        }*/
+        console.log(server.numerojugadores);
+        //socket.player.id-=2;
     });
 });
 

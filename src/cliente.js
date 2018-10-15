@@ -1,4 +1,5 @@
 var Client = {};
+Client.modojuego;
 Client.socket = io.connect();
 
 
@@ -12,15 +13,17 @@ Client.mover = function(direccion){
 Client.envDisparo = function(){
     Client.socket.emit("sDisparo")
 }
+Client.aumentar = function(){
+    console.log('si aumenta');
+    Client.socket.emit("aumenta");
+}
 
 Client.socket.on('newplayer',function(data){
     //alert("kjkschbjscdjhb");
     //console.log("listo");
-    if(data.id <=4){
         stage.addNewPlayer(data.id,data.x,data.y);
+        console.log(data.id);
        // console.log(data.id);
-    }
-    stage.musica();
 });
 Client.socket.on('allplayers',function(data){
     console.log(data);
@@ -31,6 +34,10 @@ Client.socket.on('allplayers',function(data){
 
 Client.socket.on('remove',function(id){
     stage.removePlayer(id);
+});
+
+Client.socket.on('empezarjuego',function(){
+    juego();
 });
 
 Client.socket.on('nDisparo',function(id){

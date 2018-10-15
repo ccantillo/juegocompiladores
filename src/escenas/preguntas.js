@@ -24,7 +24,16 @@ $(document).ready(function(){
     });*/
 
 
-    $('.empezar').click(iterar_preguntas);
+    //$('.empezar').click(iterar_preguntas);
+    //$('.empezar').click(juego);
+    /*('.empezar').click(function (){
+        Client.aumentar();
+        console.log('si click');
+    });*/
+    $( ".empezar" ).one( "click", function() {
+        Client.aumentar();
+        console.log('si click');
+      });
     //$('.detener').click(detener);
 
     añadir_resp(preguntas[0].respuesta_act);
