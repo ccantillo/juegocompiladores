@@ -12,7 +12,7 @@ var FlyingStar = new Phaser.Class({
         this.path = new Phaser.Curves.Ellipse(x, y, width, height);
         this.pathIndex = 0;
 
-    
+
         this.pathSpeed = speed;
         this.pathVector = new Phaser.Math.Vector2();
 
@@ -38,6 +38,7 @@ var cursors;
 var platforms;
 var platforms2;
 var stars;
+var nubes;
 var score = 0;
 var scoreText;
 var balas;
@@ -49,23 +50,39 @@ class Escena_A extends Phaser.Scene{
         super({key: key, active: true})
     }
 
-    
-    
+
+
     create(){
         //jugador princial
 
         //fondo
         this.add.image(0,300,"fondo");
         var s=0;
-        for (var i = 0; i<=10; i++) {
+        for (var i = 0; i<=3; i++) {
           this.add.image(s+1920,300,"fondo");
           s+=1920;
         }
 
+        for (var i = 0; i<=4; i++) {
+          this.add.image(s+1920,300,"fondo2");
+          s+=1920;
+        }
+
+        for (var i = 0; i<=3; i++) {
+          this.add.image(s+1920,300,"fondo3");
+          s+=1920;
+        }
+
+        for (var i = 0; i<=5; i++) {
+          this.add.image(s+1920,300,"fondo");
+          s+=1920;
+        }
+
+
         //camara
-        this.cameras.main.setBounds(0, 0, 10000, 600).setName('main');
+        this.cameras.main.setBounds(0, 0, 30000, 600).setName('main');
         this.cameras.main.setBackgroundColor('#6bf');
-        this.physics.world.setBounds(0, 0, 10000, 1080 * 2);
+        this.physics.world.setBounds(0, 0, 30000, 1080 * 2);
         this.minimap = this.cameras.add(0, 0, $('body').width(), 100).setZoom(0.15).setName('mini');
         this.minimap.setBounds(0, 0, 500, 600).setName('mini');
         this.minimap.setBackgroundColor(0x002244);
@@ -86,13 +103,15 @@ class Escena_A extends Phaser.Scene{
 
         //items
         this.crearitems();
-        
+
         //plataformas
         this.crearplat();
 
+        //nubes
         jugador_principal = new Jugador(this, 50, 300, "boom");
         jugador_principal.setScale(0.5);
 
+        this.crearnubes();
 
         //fisicas
         this.physics.add.collider(stars, platforms);
@@ -143,9 +162,9 @@ class Escena_A extends Phaser.Scene{
 
         this.music = this.sound.add('musica');
 
-    
+
     }
-    
+
     update(time, delta){
         this.ene.x = this.cameras.main.scrollX+1230;
         this.ene.y = this.cameras.main.scrollY+130;
@@ -183,20 +202,26 @@ class Escena_A extends Phaser.Scene{
                   setXY: { x: 200, y: 568, stepX:500 }
               }
           );
-  
+
           platforms.create(900+splat1, 568, 'ground');
           platforms.create(1200+splat1, 450, 'ground');
           platforms.create(1500+splat1, 300, 'ground');
           platforms.create(2000+splat1, 568, 'ground');
           platforms.create(4550+splat1, 568, 'ground');
-          platforms.create(5200+splat1, 568, 'ground');
-          platforms.create(5200+splat1, 568, 'ground');
+          platforms.create(5160+splat1, 568, 'ground');
           platforms.create(7200+splat1, 568, 'ground');
           platforms.create(7700+splat1, 568, 'ground');
           platforms.create(8300+splat1, 568, 'ground');
-          platforms.create(8600+splat1, 568, 'ground');
-  
-  
+          //arena
+          var i8=8400;
+          platforms.create(300+splat1, 400, 'groundA');
+          platforms.create(972+splat1, 568, 'groundA');
+          platforms.create(1200+splat1, 270, 'groundA');
+          platforms.create(1490+splat1, 500, 'groundA');
+          platforms.create(1700+splat1, 400, 'groundA');
+          platforms.create(2200+splat1, 400, 'groundA');
+
+
           //Plataformas 3
           platforms2 = this.physics.add.staticGroup(
               {
@@ -204,35 +229,36 @@ class Escena_A extends Phaser.Scene{
                   setXY: { x: 2700+splat2, y: 567, stepX:0 }
               }
           );
-  
-  
+
+
           platforms2.create(2900+splat2, 568, 'ground3');
           platforms2.create(3200+splat2, 530, 'ground3');
           platforms2.create(3600+splat2, 500, 'ground3');
           platforms2.create(4000+splat2, 568, 'ground3');
           platforms2.create(4300+splat2, 568, 'ground3');
-          platforms2.create(5900+splat2, 500, 'ground3');
+          platforms2.create(5830+splat2, 500, 'ground3');
           platforms2.create(6250+splat2, 568, 'ground3');
-          platforms2.create(6450+splat2, 460, 'ground3');
+          platforms2.create(6230+splat2, 460, 'ground3');
           platforms2.create(6650+splat2, 568, 'ground3');
           platforms2.create(6950+splat2, 430, 'ground3');
-  
-  
+
+
+
           //this.physics.add.overlap(this.platforms, this.cameras.main, this.removeplat, null, this);
           //platforms.create(2550, 450, 'ground');
           //platforms.create(50, 450, 'ground');
-  
+
       }
-  
+
       crearnubes(){
-  
+
         var xant=100;
         var xP = Math.random() * ((100+xant) - xant) + xant;
         xant=xP;
         var yP = Math.random() * (568 - 250) + 250;
         var step = Math.random() * (500 - 400) + 400;
         var n=0;
-  
+
         nubes = this.physics.add.staticGroup(
           {
             key: 'nube3',
@@ -243,20 +269,20 @@ class Escena_A extends Phaser.Scene{
           xP = Math.floor(Math.random() * ((xant+400) - (xant+200))) + (xant+200);
           yP = Math.random() * ((150) - (250)) + (250);
           n= Math.floor(Math.random() * (3 - 1)) + 1;
-  
+
           xant=xP;
           if(n==1)nubes.create(xP, yP, 'nube2');
           if(n==2)nubes.create(xP, yP, 'nube3');
             }
-  
-  
-  
+
+
+
         nubes.children.iterate(function (child) {
             //child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
             child.setScale(0.4);
         });
       }
-  
+
       crearitems(){
           stars = this.physics.add.group({
               key: 'star',
@@ -267,7 +293,7 @@ class Escena_A extends Phaser.Scene{
               //child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
               child.setScale(0.5);
           });
-  
+
       }
 
     addNewPlayer(id,x,y){
@@ -275,7 +301,7 @@ class Escena_A extends Phaser.Scene{
         this.playerMap[id].setScale(0.5);
         this.physics.add.collider(this.playerMap[id], platforms);
         this.physics.add.collider(this.playerMap[id], platforms2);
-        this.playerMap[id].body.collideWorldBounds = true;        
+        this.playerMap[id].body.collideWorldBounds = true;
 
     };
 
@@ -296,10 +322,10 @@ class Escena_A extends Phaser.Scene{
         }
         else if (direccion == "right")
         {
-            
-            this.playerMap[id].body.setVelocityX(260); 
+
+            this.playerMap[id].body.setVelocityX(260);
             this.playerMap[id].play('right');
-            //this.playerMap[id].anims.play('right', true);           
+            //this.playerMap[id].anims.play('right', true);
             //this.jugador1.anims.play('right', true);
         }
         else if (direccion == "stop")
@@ -314,10 +340,6 @@ class Escena_A extends Phaser.Scene{
             this.playerMap[id].body.setVelocityY(-850);
         }
 
-        /*if(this.playerMap[id].body.y >= 600){
-            this.scene.launch('escenab');
-        this.scene.pause();
-        }*/
 
     }
 
