@@ -9,10 +9,9 @@ class Pregunta {
 var no_pregunta = 0;
 
 var preguntas = [
-    new Pregunta('como saludas', 'hola', ['hola', 'chao', 'habla cachon']),
-    new Pregunta('como te despides', 'chao', ['hola', 'chao', 'habla cachon']),
-    new Pregunta('como saludas', 'habla', ['hola', 'chao', 'habla cachon']),
-    new Pregunta('sisa llegaste', 'hola', ['hola', 'chao', 'habla cachon'])
+    new Pregunta('como saludas', 'hola', ['hola', 'chao', 'habla']),
+    new Pregunta('como te despides', 'chao', ['hola', 'chao', 'habla']),
+    new Pregunta('respondiste bien las preguntas', 'hola', [' ', ' ', 'felicitaciones'])
 ];
 $(document).ready(function(){
 
@@ -49,7 +48,7 @@ function iterar_preguntas(){
     $('.pregunta').html(preguntas[no_pregunta].pregunta);
     
     preguntas[no_pregunta].opciones.forEach(function(element) {
-        $( ".sec_preguntas" ).append( "<p>"+element+"</p>" );
+        $( ".seccion" ).append( "<p>"+element+"</p>" );
     });
     
     añadir_resp(preguntas[no_pregunta].respuesta_act);
@@ -103,6 +102,7 @@ function añadir_resp(correcta){
             indexes:[correcta],
             action:function(){
                 //detener();
+                $('.pregunta').html(' ');
                 artyom.fatality();
                 iterar_preguntas();
             }

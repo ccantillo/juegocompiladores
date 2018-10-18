@@ -99,8 +99,6 @@ class Escena_A extends Phaser.Scene{
 
         //puntuacion
         this.playerMap = {};
-        scoreText = this.add.text(400, 100, 'score: 0', { fontSize: '32px', fill: '#000' });
-
         //items
         this.crearitems();
 
@@ -112,6 +110,9 @@ class Escena_A extends Phaser.Scene{
         jugador_principal.setScale(0.5);
 
         this.crearnubes();
+
+        scoreText = this.add.text(400, 200, 'score: 0', { fontSize: '32px', fill: '#000' });
+
 
         //fisicas
         this.physics.add.collider(stars, platforms);
@@ -174,11 +175,15 @@ class Escena_A extends Phaser.Scene{
              this.tick = this.time.now;
         }
         if(jugador_principal.body.y >= 600){
+            scoreText.setText(" ");
+        score = 0;
+        scoreText.setText('Score: ' + score);
             this.scene.launch('escenab');
         this.scene.pause();
         }
 
         scoreText.x = this.cameras.main.scrollX;
+        scoreText.y = this.cameras.main.scrollY+100;
     }
 
     collectStar (jugador1, star){
@@ -341,7 +346,7 @@ class Escena_A extends Phaser.Scene{
       }
 
     addNewPlayer(id,x,y){
-        this.playerMap[id] = new Jugador(this, x, y, "boom");
+        this.playerMap[id] = new Jugador(this, x, y, "boom2");
         this.playerMap[id].setScale(0.5);
         this.physics.add.collider(this.playerMap[id], platforms);
         this.physics.add.collider(this.playerMap[id], platforms2);
@@ -361,21 +366,21 @@ class Escena_A extends Phaser.Scene{
         {
             this.playerMap[id].body.setVelocityX(-260);
             //this.add.sprite(400, 300, 'boom').play('explode');
-            this.playerMap[id].play('left');
+            this.playerMap[id].play('left2');
             //location.reload(true);
         }
         else if (direccion == "right")
         {
 
             this.playerMap[id].body.setVelocityX(260);
-            this.playerMap[id].play('right');
+            this.playerMap[id].play('right2');
             //this.playerMap[id].anims.play('right', true);
             //this.jugador1.anims.play('right', true);
         }
         else if (direccion == "stop")
         {
             this.playerMap[id].body.setVelocityX(0);
-            this.playerMap[id].play('stop');
+            this.playerMap[id].play('stop2');
             //this.jugador1.anims.play('turn');
         }
 

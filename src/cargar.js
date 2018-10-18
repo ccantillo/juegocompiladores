@@ -30,6 +30,31 @@ class Cargar extends Phaser.Scene {
 
             this.anims.create(config3);
 
+            var config9 = {
+                key: 'right2',
+                frames: this.anims.generateFrameNumbers('boom2', { frames: [0, 1, 2, 3,4,5,6,7] }),
+                frameRate: 10,
+                repeat: -1
+            };
+
+            this.anims.create(config9);
+            var config10 = {
+                key: 'left2',
+                frames: this.anims.generateFrameNumbers('boom2', { frames: [9, 10, 11, 12,13,14,15] }),
+                frameRate: 10,
+                repeat: -1
+            };
+
+            this.anims.create(config10);
+            var config11 = {
+                key: 'stop2',
+                frames: this.anims.generateFrameNumbers('boom2', { frames: [4] }),
+                frameRate: 10,
+                repeat: -1
+            };
+
+            this.anims.create(config11);
+
             var config4 = {
                 key: 'exp',
                 frames: this.anims.generateFrameNumbers('laser', { frames: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }),
@@ -72,7 +97,9 @@ class Cargar extends Phaser.Scene {
         this.load.image('fondo3', './assets/fondo3.jpg');
         this.load.image('eggman', './assets/monster.png');
         this.load.image('yaper', './assets/yaper2.png');
-        this.load.spritesheet('boom', './assets/jugador2.png',
+        this.load.spritesheet('boom', './assets/jugador.png',
+        { frameWidth: 88, frameHeight: 120, endFrame: 16 });
+        this.load.spritesheet('boom2', './assets/jugador2.png',
         { frameWidth: 88, frameHeight: 120, endFrame: 16 });
         this.load.spritesheet('laser', './assets/laser2.png',
         { frameWidth: 128, frameHeight: 511, endFrame: 11 });
