@@ -62,6 +62,7 @@ class Cargar extends Phaser.Scene {
         this.load.image("groundA", "./assets/modulo1A.png");
         this.load.image("groundO", "./assets/modulo1O.png");
         this.load.image("ground3", "./assets/modulo3.png");
+        this.load.image("ground3A", "./assets/modulo3A.png");
         this.load.image("star", "./assets/star2.png");
         this.load.image('sky', './assets/sky1.png');
         this.load.image('nube2', './assets/Nube4.png');

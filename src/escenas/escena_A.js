@@ -214,12 +214,37 @@ class Escena_A extends Phaser.Scene{
           platforms.create(8300+splat1, 568, 'ground');
           //arena
           var i8=8400;
-          platforms.create(300+splat1, 400, 'groundA');
-          platforms.create(972+splat1, 568, 'groundA');
-          platforms.create(1200+splat1, 270, 'groundA');
-          platforms.create(1490+splat1, 500, 'groundA');
-          platforms.create(1700+splat1, 400, 'groundA');
-          platforms.create(2200+splat1, 400, 'groundA');
+          platforms.create(i8+300+splat1, 400, 'groundA');
+          platforms.create(i8+972+splat1, 568, 'groundA');
+          platforms.create(i8+1200+splat1, 270, 'groundA');
+          platforms.create(i8+1490+splat1, 500, 'groundA');
+          platforms.create(i8+1700+splat1, 400, 'groundA');
+          platforms.create(i8+2200+splat1, 400, 'groundA');
+          platforms.create(i8+4570+splat1, 550, 'groundA');
+          platforms.create(i8+5170+splat1, 550, 'groundA');
+          //Oscuro
+          var i9=18050;
+          platforms.create(i9+50+splat1, 550, 'groundO');
+          platforms.create(i9+650+splat1, 550, 'groundO');
+          platforms.create(i9+1250+splat1, 550, 'groundO');
+          platforms.create(i9+1680+splat1, 670, 'groundO');
+          platforms.create(i9+2250+splat1, 560, 'groundO');
+          platforms.create(i9+2850+splat1, 550, 'groundO');
+          platforms.create(i9+3350+splat1, 450, 'groundO');
+          platforms.create(i9+3950+splat1, 450, 'groundO');
+          platforms.create(i9+4550+splat1, 450, 'groundO');
+          platforms.create(i9+5150+splat1, 450, 'groundO');
+          platforms.create(i9+5650+splat1, 550, 'groundO');
+          platforms.create(i9+6250+splat1, 550, 'groundO');
+          var xPos=6750;
+          for (var z = 0; z<3; z++) {
+            platforms.create(i9+xPos+splat1, 550, 'groundO');
+            xPos+=600;
+          }
+
+          for (var k=25800; k<=30000; k+=380) {
+            platforms.create(k, 550, 'ground');
+          }
 
 
           //Plataformas 3
@@ -241,6 +266,25 @@ class Escena_A extends Phaser.Scene{
           platforms2.create(6230+splat2, 460, 'ground3');
           platforms2.create(6650+splat2, 568, 'ground3');
           platforms2.create(6950+splat2, 430, 'ground3');
+          //Arena
+          platforms2.create(i8+2900+splat2, 568, 'ground3A');
+          platforms2.create(i8+3200+splat2, 530, 'ground3A');
+          platforms2.create(i8+3600+splat2, 500, 'ground3A');
+          platforms2.create(i8+4000+splat2, 568, 'ground3A');
+          platforms2.create(i8+4300+splat2, 568, 'ground3A');
+          platforms2.create(i8+5830+splat2, 500, 'ground3A');
+          platforms2.create(i8+6230+splat2, 460, 'ground3A');
+          platforms2.create(i8+6650+splat2, 568, 'ground3A');
+          platforms2.create(i8+6950+splat2, 430, 'ground3A');
+          platforms2.create(i8+7310+splat2, 320, 'ground3A');
+          platforms2.create(i8+7750+splat2, 600, 'ground3A');
+          platforms2.create(i8+8120+splat2, 600, 'ground3A');
+          platforms2.create(i8+8470+splat2, 600, 'ground3A');
+          platforms2.create(i8+8850+splat2, 600, 'ground3A');
+          platforms2.create(i8+9250+splat2, 600, 'ground3A');
+          platforms2.create(i8+9650+splat2, 600, 'ground3A');
+          //10050 es negro
+
 
 
 
@@ -388,7 +432,6 @@ class Escena_A extends Phaser.Scene{
     }
     yaper(){
         this.scene.add('escenab', new Escena_B('escenab'));
-        //this.scene.launch('escenab');
         this.scene.pause();
     }
     posicion_principal(){
