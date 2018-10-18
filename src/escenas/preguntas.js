@@ -32,6 +32,7 @@ $(document).ready(function(){
     });*/
     $( ".empezar" ).one( "click", function() {
         Client.aumentar();
+        $( ".preguntas" ).append( "<p>Esperando otro jugador...</p>" );
         console.log('si click');
       });
     //$('.detener').click(detener);
@@ -73,12 +74,12 @@ function iterar_preguntas(){
 });*/
 
 function empezar(){
-    artyom.fatality();// Detener cualquier instancia previa
+    //artyom.fatality();// Detener cualquier instancia previa
 
     setTimeout(function(){// Esperar 250ms para inicializar
          artyom.initialize({
             lang:"es-ES",// Más lenguajes son soportados, lee la documentación
-            continuous:true,// Reconoce 1 solo comando y basta de escuchar
+            continuous:false,// En falso reconoce 1 solo comando y basta de escuchar
             listen:true, // Iniciar !
             debug:true, // Esto hace que se imprima en la consola un informe cambiar a false para no verlo
             speed:1,  //en 1 puedes hablar a una velocidad normal
@@ -102,6 +103,7 @@ function añadir_resp(correcta){
             indexes:[correcta],
             action:function(){
                 //detener();
+                artyom.fatality();
                 iterar_preguntas();
             }
         }

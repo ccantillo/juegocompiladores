@@ -4,55 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>JUEGO COMPI</title>
+    <title>Document</title>
     <link rel="icon" type="image/png" href="assets/pok.png"sizes="32x32">
-    <script src = "JS/main.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="estilos.css">
 
 </head>
 <body>
     <div id=container></div>
 
     <div class="preguntas">
-            <form id = "quiz" name = "quiz">
-                    <p class = "questions">¿Donde reciclarías las pilas usadas?</p>
-                    <input type = "radio" id = "mc" name = "question1" value = "A.Cubo Amarillo."> A. Cubo Amarillo<br>
-                    <input type = "radio" id = "mc" name = "question1" value = "B.Cubo Verde."> B.Cubo Verde.<br>
-                    <input type="radio" id="mc" name="question1"value= "C. Cubo Morado.">C. Cubo Morado.<br>
-
-                    <p class = "questions">¿Si no reciclamos el vidrio, una botella tarda mas de __________- años en desintegrarse?</p>
-                    <input type = "radio" id = "mc" name = "question2" value = "A. 500 años."> A. 500 años.<br>
-                    <input type = "radio" id = "mc" name = "question2" value = "B. 1000 años."> B. 1000 años.<br>
-                    <input type = "radio" id = "mc" name = "question2" value = "C. 100.000 años."> C. 100.000 años.<br>
-
-                    <p class = "questions">¿Las tres “R” significan:?</p>
-
-                    <input type = "radio" id = "mc" name = "question3" value = "A. recoger, reciclar y recibir."> A. recoger, reciclar y recibir.<br>
-                    <input type = "radio" id = "mc" name = "question3" value = "B. reducir, reciclar y reutilizar"> B. reducir, reciclar y reutilizar.<br>
-                    <input type = "radio" id = "mc" name = "question3" value = "C. recopilar, romper y reciclar."> C. recopilar, romper y reciclar.<br>
-
-
-                    <input id = "button" type = "button" value = "Termine" onclick = "check();">
-
-
-                    </form>
-
-                    <div id = "after_submit">
-                    <p id = "number_correct"></p>
-                    <p id = "message"></p>
-                    </div>
-
-        <input class="empezar" type="button" value="empezar juego">
-        <p>Luego de presionar el botón el juego iniciará cuando encuentre un compañero para ti</p>
-    <!--<input class="detener" type="button" value="detener">-->
-    <input type="text" id="salida" style="width: 400px;" />
-
+        <a class='btn empezar' type='submit'>Empezar juego</a>
+    <!--<input type="text" id="salida" style="width: 400px;" />-->
+    </div>
     <div class="sec_preguntas">
         <h2 class="pregunta"></h2>
-    </div>
     </div>
     <script src="jquery-3.3.1.min.js"></script>
     <!--script src="./node_modules/phaser/dist/phaser.min.js"></script>-->
     <!--<script src="./src/objetos/phaser.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.14.0/dist/phaser.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
     <script src="src/objetos/jugador.js"></script>
@@ -63,9 +34,8 @@
     <script src="src/escenas/escena_B.js"></script>
     <script src="./src/init.js"></script>
     <script src="./src/artyom.js"></script>
-	  <script src="./src/artyomCommands.js"></script>
+	<script src="./src/artyomCommands.js"></script>
     <script src="src/escenas/preguntas.js"></script>
-
 
 </body>
 </html>

@@ -37,7 +37,9 @@ Client.socket.on('remove',function(id){
 });
 
 Client.socket.on('empezarjuego',function(){
+    $(".preguntas").hide();
     juego();
+    iterar_preguntas();
 });
 
 Client.socket.on('nDisparo',function(id){

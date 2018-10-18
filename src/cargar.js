@@ -74,8 +74,6 @@ class Cargar extends Phaser.Scene {
         this.load.image('yaper', './assets/yaper2.png');
         this.load.spritesheet('boom', './assets/jugador2.png',
         { frameWidth: 88, frameHeight: 120, endFrame: 16 });
-        this.load.spritesheet('boom2', './assets/jugador.png',
-        { frameWidth: 88, frameHeight: 120, endFrame: 16 });
         this.load.spritesheet('laser', './assets/laser2.png',
         { frameWidth: 128, frameHeight: 511, endFrame: 11 });
         this.load.spritesheet('mons', './assets/monster.png',
