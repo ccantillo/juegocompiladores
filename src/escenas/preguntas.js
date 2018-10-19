@@ -9,8 +9,8 @@ class Pregunta {
 var no_pregunta = 0;
 
 var preguntas = [
-    new Pregunta('como saludas', 'hola', ['hola', 'chao', 'habla']),
-    new Pregunta('como te despides', 'chao', ['hola', 'chao', 'habla']),
+    new Pregunta('¿Cómo saludas?', 'hola', ['hola', 'chao', 'habla']),
+    new Pregunta('¿Cómo te despides?', 'chao', ['hola', 'chao', 'habla']),
     new Pregunta('respondiste bien las preguntas', 'hola', [' ', ' ', 'felicitaciones'])
 ];
 $(document).ready(function(){
